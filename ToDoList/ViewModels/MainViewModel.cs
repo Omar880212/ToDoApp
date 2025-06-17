@@ -32,9 +32,9 @@ namespace ToDoList.ViewModels
             {
                 _selectedTask = value;
                 OnPropertyChange();
-                EditTaskCommand.RaiseCanExecuteChanged();
-                DeleteTaskCommand.RaiseCanExecuteChanged();
-                ToggleCompleteCommand.RaiseCanExecuteChanged();
+                EditTaskCommand?.RaiseCanExecuteChanged();
+                DeleteTaskCommand?.RaiseCanExecuteChanged();
+                ToggleCompleteCommand?.RaiseCanExecuteChanged();
             } 
         }        
         public ToDoListApp TaskBeingEdited
@@ -82,20 +82,16 @@ namespace ToDoList.ViewModels
         public RelayCommand CancelEditCommand { get; }
         public RelayCommand DeleteTaskCommand { get; }
         public RelayCommand ToggleCompleteCommand { get; }
-        public MainViewModel() : this(new TodoServicce())
-        {
-
-        }
         public MainViewModel(IToDoServices toDoServices)
         {
             _todoServices = (TodoServicce)toDoServices;
             Tasks = new ObservableCollection<ToDoListApp>();
 
-            Tasks.CollectionChanged += (s, e) =>
-            {
-                OnPropertyChange(nameof(CompletedTaskCount));
-                OnPropertyChange(nameof(PendingTaskCount));
-            };
+            //Tasks.CollectionChanged += (s, e) =>
+            //{
+            //    OnPropertyChange(nameof(CompletedTaskCount));
+            //    OnPropertyChange(nameof(PendingTaskCount));
+            //};
 
             AddTaskCommand = new RelayCommand(async () => await AddTask(), () => !string.IsNullOrEmpty(NewTaskTitle));
             EditTaskCommand = new RelayCommand(async () => await EditTask(), () => SelectedTask != null && !SelectedTask.IsLocked);
@@ -124,6 +120,7 @@ namespace ToDoList.ViewModels
                 MessageBox.Show($"Error loading tasks: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private async Task AddTask()
         {
             if (string.IsNullOrEmpty(NewTaskTitle))
