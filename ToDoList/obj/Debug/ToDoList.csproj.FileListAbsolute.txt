@@ -23,3 +23,14 @@ C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\obj\Debug\ToDoList.
 C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\obj\Debug\ToDoList.csproj.CopyComplete
 C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\obj\Debug\ToDoList.exe
 C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\obj\Debug\ToDoList.pdb
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\CommonServiceLocator.dll
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\omar_\Documents\GitHub\ToDoListApp\ToDoApp\ToDoList\bin\Debug\GalaSoft.MvvmLight.Platform.xml

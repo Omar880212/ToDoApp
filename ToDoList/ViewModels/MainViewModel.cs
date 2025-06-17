@@ -95,8 +95,27 @@ namespace ToDoList.ViewModels
             CancelEditCommand = new RelayCommand(CancelEdit);
             DeleteTaskCommand = new RelayCommand(async () => await DeleteTask(), () => SelectedTask != null && !SelectedTask.IsLocked);
             ToggleCompleteCommand = new RelayCommand(async () => await ToggleComplete(), () => SelectedTask != null && !SelectedTask.IsLocked);
-        }        
 
+            _ = LoadTasks();
+        }
+
+        private async Task LoadTasks()
+        {
+            try
+            {
+                var tasks = await _todoServices.GetAllTaskAsync();
+                Tasks.Clear();
+
+                foreach (var task in tasks) 
+                {
+                    Tasks.Add(task);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading tasks","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private Task AddTask()
         {
             throw new NotImplementedException();
