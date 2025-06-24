@@ -23,7 +23,6 @@ namespace ToDoList.ViewModels
 
         public int CompletedTaskCount => Tasks?.Count(t => t.IsCompleted) ?? 0;
         public int PendingTaskCount => Tasks?.Count(t => t.IsCompleted) ?? 0;
-
         public ObservableCollection<ToDoListApp> Tasks { get; set; }
         public ToDoListApp SelectedTask 
         { 
@@ -102,7 +101,6 @@ namespace ToDoList.ViewModels
 
             _ = LoadTasks();
         }
-
         private async Task LoadTasks()
         {
             try
@@ -120,7 +118,6 @@ namespace ToDoList.ViewModels
                 MessageBox.Show($"Error loading tasks: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private async Task AddTask()
         {
             if (string.IsNullOrEmpty(NewTaskTitle))
