@@ -30,8 +30,11 @@ namespace TodoListApp
                         options.UseSqlServer(connectionString));
 
                     services.AddTransient<ITodoService, TodoService>();
-                    services.AddTransient<MainViewModel>();                    
+                    services.AddTransient<MainViewModel>();
                     services.AddTransient<MainWindow>();
+
+                    // ¡ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ AQUÍ!
+                    services.AddTransient<LoginWindow>();
                 })
                 .Build();
         }
@@ -39,8 +42,7 @@ namespace TodoListApp
         protected override async void OnStartup(StartupEventArgs e)
         {
             await _host.StartAsync();
-
-            // Ahora que no hay StartupUri, ESTE código tiene control total
+            
             var loginWindow = _host.Services.GetRequiredService<LoginWindow>();
             loginWindow.Show();
 

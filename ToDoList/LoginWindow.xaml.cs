@@ -13,13 +13,11 @@ namespace TodoListApp
             InitializeComponent();
             _serviceProvider = serviceProvider;
         }
-        
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-
             mainWindow.Show();
-
             this.Close();
         }
     }
