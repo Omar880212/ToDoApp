@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|c:\\users\\orodri81\\documents\\c\u00F3digo\\todoapp\\todolist\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|solutionrelative:todolist\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|c:\\users\\orodri81\\documents\\c\u00F3digo\\todoapp\\todolist\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|solutionrelative:todolist\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|c:\\users\\orodri81\\documents\\c\u00F3digo\\todoapp\\todolist\\loginwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|solutionrelative:todolist\\loginwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|c:\\users\\orodri81\\documents\\c\u00F3digo\\todoapp\\todolist\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9D2E5887-D1DC-4892-8E04-DACF09AFFDE5}|ToDoList\\ToDoList.csproj|solutionrelative:todolist\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +47,56 @@
             {
               "$type": "Bookmark",
               "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\App.xaml.cs",
+              "RelativeDocumentMoniker": "ToDoList\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\App.xaml.cs",
+              "RelativeToolTip": "ToDoList\\App.xaml.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T05:42:35.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\App.xaml",
+              "RelativeDocumentMoniker": "ToDoList\\App.xaml",
+              "ToolTip": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\App.xaml",
+              "RelativeToolTip": "ToDoList\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-26T05:42:32.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\LoginWindow.xaml.cs",
+              "RelativeDocumentMoniker": "ToDoList\\LoginWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\LoginWindow.xaml.cs",
+              "RelativeToolTip": "ToDoList\\LoginWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T05:41:34.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "ToDoList\\LoginWindow.xaml",
+              "ToolTip": "C:\\Users\\ORODRI81\\Documents\\C\u00F3digo\\ToDoApp\\ToDoList\\LoginWindow.xaml",
+              "RelativeToolTip": "ToDoList\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-26T05:41:07.316Z",
+              "EditorCaption": ""
             }
           ]
         }

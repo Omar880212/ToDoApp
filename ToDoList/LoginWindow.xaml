@@ -1,0 +1,34 @@
+﻿<Window x:Class="TodoListApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TodoListApp"
+        mc:Ignorable="d"
+        Title="Login - Todo List App" Height="350" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+
+    <Border Background="#673AB7" CornerRadius="12">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" Margin="30">
+                <TextBlock Text="Welcome Back!" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Username" Foreground="White" Margin="0,10,0,5"/>
+                <TextBox Padding="8" BorderThickness="0"/>
+
+                <TextBlock Text="Password" Foreground="White" Margin="0,10,0,5"/>
+                <PasswordBox Padding="8" BorderThickness="0"/>
+                
+                <Button Content="Login" 
+                        Margin="0,30,0,0" 
+                        Padding="12,8" 
+                        Background="White" 
+                        Foreground="#673AB7" 
+                        FontWeight="Bold" 
+                        BorderThickness="0"
+                        Click="LoginButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

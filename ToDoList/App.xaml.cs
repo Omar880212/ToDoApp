@@ -39,9 +39,10 @@ namespace TodoListApp
         protected override async void OnStartup(StartupEventArgs e)
         {
             await _host.StartAsync();
-            
-            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-            mainWindow.Show();
+
+            // Ahora que no hay StartupUri, ESTE código tiene control total
+            var loginWindow = _host.Services.GetRequiredService<LoginWindow>();
+            loginWindow.Show();
 
             base.OnStartup(e);
         }

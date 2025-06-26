@@ -1,5 +1,4 @@
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\MainWindow.baml
-C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\App.baml
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\MainWindow.g.cs
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\App.g.cs
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\ToDoList_MarkupCompile.cache
@@ -160,3 +159,6 @@ C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\bin\Debug\zh-Hant\Microsoft
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\ToDoList.csproj.Up2Date
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\ToDoList.exe
 C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\ToDoList.pdb
+C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\LoginWindow.g.cs
+C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\ToDoList_MarkupCompile.lref
+C:\Users\ORODRI81\Documents\Código\ToDoApp\ToDoList\obj\Debug\LoginWindow.baml
