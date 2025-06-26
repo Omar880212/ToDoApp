@@ -32,8 +32,6 @@ namespace TodoListApp
                     services.AddTransient<ITodoService, TodoService>();
                     services.AddTransient<MainViewModel>();
                     services.AddTransient<MainWindow>();
-
-                    // ¡ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ AQUÍ!
                     services.AddTransient<LoginWindow>();
                 })
                 .Build();
