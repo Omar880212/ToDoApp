@@ -1,272 +1,108 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
-using ToDoList.Commands;
-using ToDoList.Models;
-using ToDoList.Services;
+using TodoListApp.Commands;
+using TodoListApp.Models;
+using TodoListApp.Services;
 
-namespace ToDoList.ViewModels
+namespace TodoListApp.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly TodoServicce _todoServices;
-        private ToDoListApp _selectedTask;
-        private ToDoListApp _taskBeinEdited;
-        private string _newTaskTitle;
-        private string _newTaskDescription;
-        private bool _isAddingTask;
+        private readonly ITodoService _todoService;
 
-        public int CompletedTaskCount => Tasks?.Count(t => t.IsCompleted) ?? 0;
-        public int PendingTaskCount => Tasks?.Count(t => t.IsCompleted) ?? 0;
-        public ObservableCollection<ToDoListApp> Tasks { get; set; }
-        public ToDoListApp SelectedTask 
-        { 
+        private ObservableCollection<Models.TodoTask> _tasks;
+        public ObservableCollection<Models.TodoTask> Tasks
+        {
+            get => _tasks;
+            set { _tasks = value; OnPropertyChanged(nameof(Tasks)); }
+        }
+
+        private Models.TodoTask _selectedTask;
+        public Models.TodoTask SelectedTask
+        {
             get => _selectedTask;
-            set 
-            {
-                _selectedTask = value;
-                OnPropertyChange();
-                EditTaskCommand?.RaiseCanExecuteChanged();
-                DeleteTaskCommand?.RaiseCanExecuteChanged();
-                ToggleCompleteCommand?.RaiseCanExecuteChanged();
-            } 
-        }        
-        public ToDoListApp TaskBeingEdited
-        {
-            get => _taskBeinEdited;
-            set 
-            {
-                _taskBeinEdited= value;
-                OnPropertyChange();
-                OnPropertyChange(nameof(IsEditingTask));
-            }
-        }
-        public string NewTaskTitle 
-        {
-            get => _newTaskTitle;
-            set 
-            {
-                _newTaskTitle= value;
-                OnPropertyChange();
-                AddTaskCommand.RaiseCanExecuteChanged();
-            }
-        }
-        public string NewTaskDescription 
-        {
-            get => _newTaskDescription;
-            set 
-            {
-                _newTaskDescription= value;
-                OnPropertyChange();
-            }
-        }
-        public bool IsAddingTask 
-        {
-            get => _isAddingTask; 
             set
             {
-                _isAddingTask = value;
-                OnPropertyChange();
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+                DeleteTaskCommand.RaiseCanExecuteChanged();
+                ToggleCompleteCommand.RaiseCanExecuteChanged();
             }
         }
-        public bool IsEditingTask => TaskBeingEdited!= null;
+
+        private string _newTaskTitle;
+        public string NewTaskTitle
+        {
+            get => _newTaskTitle;
+            set { _newTaskTitle = value; OnPropertyChanged(nameof(NewTaskTitle)); AddTaskCommand.RaiseCanExecuteChanged(); }
+        }
+
+        private string _newTaskDescription;
+        public string NewTaskDescription
+        {
+            get => _newTaskDescription;
+            set { _newTaskDescription = value; OnPropertyChanged(nameof(NewTaskDescription)); }
+        }
+
         public RelayCommand AddTaskCommand { get; }
-        public RelayCommand EditTaskCommand { get; }
-        public RelayCommand SaveTaskCommand { get; }
-        public RelayCommand CancelEditCommand { get; }
         public RelayCommand DeleteTaskCommand { get; }
         public RelayCommand ToggleCompleteCommand { get; }
-        public MainViewModel(IToDoServices toDoServices)
+
+        public MainViewModel(ITodoService todoService)
         {
-            _todoServices = (TodoServicce)toDoServices;
-            Tasks = new ObservableCollection<ToDoListApp>();
+            _todoService = todoService;
+            Tasks = new ObservableCollection<Models.TodoTask>();
 
-            //Tasks.CollectionChanged += (s, e) =>
-            //{
-            //    OnPropertyChange(nameof(CompletedTaskCount));
-            //    OnPropertyChange(nameof(PendingTaskCount));
-            //};
-
-            AddTaskCommand = new RelayCommand(async () => await AddTask(), () => !string.IsNullOrEmpty(NewTaskTitle));
-            EditTaskCommand = new RelayCommand(async () => await EditTask(), () => SelectedTask != null && !SelectedTask.IsLocked);
-            SaveTaskCommand = new RelayCommand(async () => await SaveTask());
-            CancelEditCommand = new RelayCommand(CancelEdit);
-            DeleteTaskCommand = new RelayCommand(async () => await DeleteTask(), () => SelectedTask != null && !SelectedTask.IsLocked);
-            ToggleCompleteCommand = new RelayCommand(async () => await ToggleComplete(), () => SelectedTask != null && !SelectedTask.IsLocked);
+            AddTaskCommand = new RelayCommand(async () => await AddTask(), () => !string.IsNullOrWhiteSpace(NewTaskTitle));
+            DeleteTaskCommand = new RelayCommand(async () => await DeleteTask(), () => SelectedTask != null);
+            ToggleCompleteCommand = new RelayCommand(async () => await ToggleComplete(), () => SelectedTask != null);
 
             _ = LoadTasks();
         }
+
         private async Task LoadTasks()
         {
-            try
+            var tasks = await _todoService.GetAllTasksAsync();
+            Tasks.Clear();
+            foreach (var task in tasks)
             {
-                var tasks = await _todoServices.GetAllTaskAsync();
-                Tasks.Clear();
-
-                foreach (var task in tasks) 
-                {
-                    Tasks.Add(task);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading tasks: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Tasks.Add(task);
             }
         }
+
         private async Task AddTask()
         {
-            if (string.IsNullOrEmpty(NewTaskTitle))
+            var newTask = new Models.TodoTask
             {
-                return;
-            }
-
-            try
-            {
-                var newTask = new ToDoListApp
-                {
-                    Title = NewTaskTitle.Trim(),
-                    Description = NewTaskDescription.Trim() ?? string.Empty,
-                };
-
-                var addedTask = await _todoServices.AddTaskAsync(newTask);
-                Tasks.Add(addedTask);
-
-                NewTaskTitle = string.Empty;
-                NewTaskDescription = string.Empty;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding task: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                Title = NewTaskTitle,
+                Description = NewTaskDescription
+            };
+            await _todoService.AddTaskAsync(newTask);
+            Tasks.Add(newTask);
+            NewTaskTitle = string.Empty;
+            NewTaskDescription = string.Empty;
         }
-        private async Task EditTask()
-        {
-            if (SelectedTask == null)
-            {
-                return;
-            }
-            try
-            {
-                var locked = await _todoServices.LockTaskAsync(SelectedTask.Id, Environment.UserName);
 
-                if (locked) 
-                {
-                    TaskBeingEdited = new ToDoListApp
-                    {
-                        Id = SelectedTask.Id,
-                        Title = SelectedTask.Title,
-                        Description = SelectedTask.Description,
-                        IsCompleted = SelectedTask.IsCompleted,
-                        CreatedDate = SelectedTask.CreatedDate,
-                        LastModified = SelectedTask.LastModified
-                    };
-                }
-                else
-                {
-                    MessageBox.Show($"This task is currently bein edited by another user.", "Task locked", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error editing task: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        private async Task SaveTask()
-        {
-            if (TaskBeingEdited == null)
-            {
-                return;
-            }
-            try
-            {
-                var updateTask = await _todoServices.UpdateTaskAsync(TaskBeingEdited);
-                if (updateTask != null)
-                {
-                    var existingTask = Tasks.FirstOrDefault(t => t.Id == updateTask.Id);
-                    if (existingTask != null) 
-                    {
-                        existingTask.Title = updateTask.Title;
-                        existingTask.Description = updateTask.Description;
-                        existingTask.IsCompleted = updateTask.IsCompleted;
-                        existingTask.LastModified = updateTask.LastModified;
-                    }
-
-                    await _todoServices.UnlockTaskAsync(TaskBeingEdited.Id, Environment.UserName);
-                    TaskBeingEdited = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving task: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        private async void CancelEdit()
-        {
-            if (TaskBeingEdited != null)
-            {
-                try
-                {
-                    await _todoServices.UnlockTaskAsync(TaskBeingEdited.Id, Environment.UserName);
-                    TaskBeingEdited = null;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error canceling edit: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
         private async Task DeleteTask()
         {
-            if (SelectedTask == null)
-            {
-                return;
-            }
-            try
-            {
-                var result = MessageBox.Show($"Are you sure you want to delete '{SelectedTask.Title}'?",
-                                              "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes) 
-                {
-                    var deleted = await _todoServices.DeleteTaskAsync(SelectedTask.Id);
-                    if (deleted) 
-                    {
-                        Tasks.Remove(SelectedTask);
-                        SelectedTask = null;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting edit: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (SelectedTask == null) return;
+            await _todoService.DeleteTaskAsync(SelectedTask.Id);
+            Tasks.Remove(SelectedTask);
         }
+
         private async Task ToggleComplete()
         {
-            if (SelectedTask == null)
-            {
-                return;
-            }
-            try
-            {
-                SelectedTask.IsCompleted = !SelectedTask.IsCompleted;
-                await _todoServices.UpdateTaskAsync(SelectedTask);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updatung edit: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (SelectedTask == null) return;
+            SelectedTask.IsCompleted = !SelectedTask.IsCompleted;
+            await _todoService.UpdateTaskAsync(SelectedTask);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChange([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

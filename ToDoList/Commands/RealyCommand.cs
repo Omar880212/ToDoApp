@@ -1,40 +1,13 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ToDoList.Commands
+namespace TodoListApp.Commands
 {
-    public class RealyCommand : ICommand
+    public class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        private readonly Action _execute;
 
-        private RealyCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            _execute= execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
-
-        public RealyCommand(Action execute, Func<bool> canExecute = null)
-        {
-            _execute = _ => execute();
-            if (canExecute != null)
-            {
-                _canExecute = _ => canExecute();
-            }
-            else
-            {
-                _canExecute = null;
-            }
-        }
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute?.Invoke(parameter) ?? true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute(parameter);
-        }
+        private readonly Func<bool> _canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -42,7 +15,28 @@ namespace ToDoList.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void RaiseCanExecuteChanged() 
+        public RelayCommand(Action execute) : this(execute, null)
+        {
+
+        }
+
+        public RelayCommand(Action execute, Func<bool> canExecute)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
+        }
+
+        public void RaiseCanExecuteChanged()
         {
             CommandManager.InvalidateRequerySuggested();
         }
