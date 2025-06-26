@@ -1,0 +1,16 @@
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.zip
+*.rar
+*.msi
+**/[Dd]ebug/*
+**/[Oo]bj/*
+**/[Bb]in/*
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+**/.vs/*
+*.ide-shm
+*.ide-wal
